@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API de Perros</title>
+</head>
+<body>
+  <h1>API de Perros</h1>
+  
+  <label for="breed">Selecciona una raza de perro:</label>
+  <select id="breed">
+    <option value="affenpinscher">Affenpinscher</option>
+    <option value="beagle">Beagle</option>
+    <option value="chihuahua">Chihuahua</option>
+    
+  </select>
+  
+  <button id="fetchButton">Obtener imagen</button>
+  
+  <div id="imageContainer">
+   
+  </div>
+
+  <script>
+    const fetchButton = document.getElementById('fetchButton');
+    const breedSelect = document.getElementById('breed');
+    const imageContainer = document.getElementById('imageContainer');
+    
+    fetchButton.addEventListener('click', async () => {
+      const selectedBreed = breedSelect.value;
+      const response = await fetch(`https://dog.ceo/api/breed/${selectedBreed}/images/random`);
+      const data = await response.json();
+      const imageUrl = data.message;
+
+     
+      imageContainer.innerHTML = `<img src="${imageUrl}" alt="Imagen de perro">`;
+    });
+  </script>
+</body>
+</html>
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="razas">Razas de perros</label>
+    <select id="razas">   </select>
+    <button id="boton">Clic pa rellenar</button>
+
+    <script>
+        window.onload=function()
+        {
+            fetch('https://dog.ceo/api/breeds/list/all')
+                .then(response=>response.json())
+                    .then(sdato=> {console.Log(dato.message)
+                        let razas = Object.keys(dato.message);
+                        //console.log(razas);
+                        razas.forEach(elemento=>
+                        {
+                            let opcion = document.createElement('option');
+                            opcion.value  = elemento;
+                            opcion.text = elemento;
+                            document.getElementById('razas').appendChild(opcion);
+                        })
+                    })
+            
+            
+        }
+
+        document.getElementById('boton').addEventListener('click',()=>
+                        {
+                            let seleccionado = document.getElementById('razas').value;
+                            let url = 'https://dog.ceo/api/'+seleccionado+'/list/all';
+                        })
+    </script>
+</body>
+</html> -->
