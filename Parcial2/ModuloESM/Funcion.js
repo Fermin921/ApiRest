@@ -1,6 +1,6 @@
 let frases = ["Que paso", "AAAAAA", "Hasta luego", "APiREST"];
 
-export async function ObtenerFrase(indice) 
+export function ObtenerFrase(indice) 
 {
     return Promise.resolve(frases[indice]);
 }
