@@ -1,8 +1,8 @@
 {
-  "name": "apirest",
+  "name": "palabras",
   "version": "1.0.0",
   "description": "Repositorio para la materia de APi REST",
-  "main": "index.js",
+  "main": "funcion.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

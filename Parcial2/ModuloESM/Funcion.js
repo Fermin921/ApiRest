@@ -4,3 +4,4 @@ export function ObtenerFrase(indice)
 {
     return Promise.resolve(frases[indice]);
 }
+
