@@ -1,7 +1,9 @@
-const express=require('express');
-const app=express();
+var express=require('express');
+var  morgan = require('morgan')
 
-app.use(express.json());
+var app=express();
+
+app.use(morgan('combined' ));
 
 app.get("/alumnos/:carrera",(req,res)=>{
     console.log(req.params);
