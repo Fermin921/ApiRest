@@ -33,6 +33,25 @@ if(rows.length==0)
 }
 });
 
+app.delete("/usuarios",async(req,res)=>{    
+    try{
+        const conn=await mysql.createConnection({host:'localhost',user:'root',password:'',database:'login'})
+        const[rows,fields]=await conn.query(`DELETE from usuario where Tipo=${req.query.Tipo}`);
+        if(rows.affectedRows==0)
+        {
+            
+            res.json({mensaje:"Registro No Eliminado"});
+        }
+        else
+        {
+            res.json({mensaje:"Registro Eliminado"});
+        }
+        
+    }catch(err){
+        res.status(500).json({mensaje:err.sqlMessage});
+    }
+});
+
 app.listen(8080,()=>{
     console.log("Servidor express escuchando en el puerto 8080");
 });
