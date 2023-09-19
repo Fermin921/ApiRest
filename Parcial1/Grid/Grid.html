@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Tabla con Bootstrap Table</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/bootstrap-table.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+<h1>Tabla con Bootstrap</h1>
+<table id="miTabla" data-toggle="table" data-pagination="true" data-search="true">
+    <thead>
+    <tr>
+        <th data-field="Tipo">Tipo</th>
+        <th data-field="Usuario">Usuario</th>
+        <th data-field="Contraseña">Contraseña</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Aquí se llenarán los datos de la API -->
+    </tbody>
+</table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/bootstrap-table.min.js"></script>
+<script src="./Grid.js"></script>
+
+</body>
+</html>
