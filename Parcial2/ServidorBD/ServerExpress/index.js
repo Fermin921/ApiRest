@@ -1,24 +1,67 @@
-//modulo npm i express
 const express=require('express');
 const morgan = require('morgan');
 const fs=require('fs');
 const path=require('path');
 const mysql =require('mysql2/promise');
+const bearerToken = require('express-bearer-token'); 
 const app=express();
 const cors = require('cors');
 var accessLogStream = fs.createWriteStream(path.join(__dirname,'access.log'),{flags:'a'});
 app.use(morgan('combined',{stream:accessLogStream}));
 app.use(cors());
 app.use(express.json());
+app.use(bearerToken());
+const multer = require('multer');
+const folder = path.join(__dirname+'/archivos/');
+const storage = multer.diskStorage({
+    destination : function(req,file,cb) {cb(null,folder)},
+    filename: function (req,file,cb) {cb(null,file.originalname)}
+});
+const upload = multer({storage:storage})
+app.use(express.urlencoded({extended:true}));
+app.use(upload.single('archivo'));
+
+app.post('/RecibirArchivo',(req,res)=>{
+    console.log(`se recibio el archivo: ${req.file.originalname}`);
+    console.log('se recibio el formulario:'+JSON.stringify(req.body));
+    res.json(req.body);
+})
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended:true}));
+app.post('/Recibir', (req, res) => {
+    const { tipo, usuario, contraseña } = req.body;
+    res.json({ mensaje: 'Datos recibidos exitosamente \n Tipo: '+tipo + '\n Usuario: ' + usuario + '\ Contraseña: '+contraseña });
+});
 
 app.get("/usuarios",async(req,res)=>{    
     try{
-        const conn=await mysql.createConnection({host:'localhost',user:'root',password:'',database:'login'})
-        const[rows,fields]=await conn.query('SELECT * from usuario');
-        res.json(rows);
+        const token = req.token
+        
+            const conn=await mysql.createConnection({host:'localhost',user:'root',password:'',database:'login'})
+            const[rows,fields]=await conn.query('SELECT * from usuario');
+            res.json(rows);
+        
+        
+            console.log("NO diste bien la key bro");
+            res.status(401).json({mensaje: 'Token inválido'});
+        
     }catch(err){
         res.status(500).json({mensaje:err.sqlMessage});
     }
+});
+
+const basicAuth = require('express-basic-auth');
+
+// Configurar el middleware de autenticación básica
+const auth = basicAuth({
+    users: { 'Fermin921': '1234' }, // Aquí debes proporcionar tu usuario de GitHub y tu token personal
+    challenge: true, // Esto enviará un encabezado WWW-Authenticate para solicitar autenticación
+    unauthorizedResponse: 'Acceso no autorizado', // Mensaje en caso de autenticación fallida
+});
+
+  // Ruta protegida que requiere autenticación
+app.get('/ruta-protegida', auth, (req, res) => {
+    res.send('¡Acceso permitido!');
 });
 
 app.get("/usuarios/:id",async(req,res)=>{    
@@ -81,8 +124,6 @@ app.delete("/usuarios",async(req,res)=>{
         res.status(500).json({mensaje:err.sqlMessage});
     }
 });
-
-
 
 app.listen(8080,()=>{
     console.log("Servidor express escuchando en el puerto 8080");

@@ -1,0 +1,2 @@
+Librerias a instalar:
+pip install psycopg2
