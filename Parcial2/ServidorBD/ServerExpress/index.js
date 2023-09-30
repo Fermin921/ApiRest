@@ -54,9 +54,9 @@ const basicAuth = require('express-basic-auth');
 
 // Configurar el middleware de autenticación básica
 const auth = basicAuth({
-    users: { 'Fermin921': '1234' }, // Aquí debes proporcionar tu usuario de GitHub y tu token personal
-    challenge: true, // Esto enviará un encabezado WWW-Authenticate para solicitar autenticación
-    unauthorizedResponse: 'Acceso no autorizado', // Mensaje en caso de autenticación fallida
+    users: { 'Fermin921': '1234' }, // 
+    challenge: true, // 
+    unauthorizedResponse: 'Acceso no autorizado', // 
 });
 
   // Ruta protegida que requiere autenticación
