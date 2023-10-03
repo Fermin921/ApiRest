@@ -11,6 +11,7 @@ app.use(morgan('combined',{stream:accessLogStream}));
 app.use(cors());
 app.use(express.json());
 app.use(bearerToken());
+
 const multer = require('multer');
 const folder = path.join(__dirname+'/archivos/');
 const storage = multer.diskStorage({
