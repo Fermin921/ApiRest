@@ -1,11 +1,13 @@
 const express = require('express');
-const {check,validationResult} = require('express-validator');
+const {check,validationResult} = require('express-validator');//check revisa todos los posibles casos y resultvalidation es donde se obtendra el resultado de la comprobacion
 const cors = require('cors');
 const app=express();
 app.use(cors());
 app.use(express.json());
 
-app.post('/Peticion',check('tipo').isNumeric(),check('email').isEmail(),(req,res)=>{
+const Validation = {}
+
+app.post('/Peticion',check('tipo').isNumeric().withMessage("Que paso pa, tiene que llevar numeros"),check('email').isEmail(),(req,res)=>{
     const result = validationResult(req);
     if(result.isEmpty())
     {
