@@ -7,18 +7,30 @@ app.use(express.json());
 
 const Validation = {}
 
+
 app.post('/Peticion',check('tipo').isNumeric().withMessage("Que paso pa, tiene que llevar numeros"),check('email').isEmail(),(req,res)=>{
-    const result = validationResult(req);
-    if(result.isEmpty())
+    try
     {
-        console.log(req.body);
-        res.json({mensaje:"Respuesta peticion post"});
+        const result = validationResult(req);
+        if(result.isEmpty())
+        {
+            console.log(req.body);
+            res.json({mensaje:"Respuesta peticion post"});
+        }
+        else
+        {
+            res.json(result);
+        }
     }
-    else
+    catch (err)
     {
-        res.json(result);
+        app.use(err,req,res,next())
     }
+    
 });
+
+
+
 
 app.listen(8080,()=>{
     console.log("Servidor escuchando en el puerto 8080");
