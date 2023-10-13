@@ -1,0 +1,11 @@
+{
+  "name": "fermin921",
+  "version": "1.0.0",
+  "description": "Ejercicio de creacion de modulos de javascript y publicacion en el registro de npm.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
