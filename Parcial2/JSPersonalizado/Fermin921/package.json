@@ -1,0 +1,16 @@
+{
+  "name": "fermin921",
+  "version": "1.0.0",
+  "description": "Ejercicio de creacion de modulos de javascript y publicacion en el registro de npm.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "jsdoc -c jsdoc.json --readme README.md"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "agility-jsdoc-template": "^1.0.3",
+    "clean-jsdoc-theme": "^4.2.13"
+  }
+}
