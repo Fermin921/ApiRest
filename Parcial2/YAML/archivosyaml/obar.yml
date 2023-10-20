@@ -1,0 +1,8 @@
+persona:
+  nombre: Sergio Martinez
+  edad: 35
+  ocupacion: Desarrollador
+  direccion:
+    calle: Calle Principal 123
+    ciudad: Ciudad Ejemplo
+    estado: Estado de Ejemplo

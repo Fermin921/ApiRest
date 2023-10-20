@@ -1,0 +1,11 @@
+persona:
+  nombre: Sergio Martinez
+  edad: 35
+  dirección:
+    calle: Calle Principal 123
+    ciudad: Ciudad Ejemplo
+    estado: Estado de Ejemplo
+  hobbies:
+    - Leer
+    - Jugar al fútbol
+    - Programar
