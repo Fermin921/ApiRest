@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buscar Artista de Spotify</title>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    }
+
+    .search-container {
+    margin-top: 20px;
+    }
+
+    .search-input {
+    padding: 10px;
+    font-size: 16px;
+    }
+
+    .search-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    }
+
+    .artist-name {
+    font-size: 2em;
+    margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<h1>Buscar Artista en Spotify</h1>
+
+<div class="search-container">
+    <input type="text" class="search-input" id="artistSearch" placeholder="Nombre del artista">
+    <button class="search-button" onclick="buscarArtista()">Buscar</button>
+</div>
+
+<div class="artist-name" id="artistName"></div>
+
+<script>
+    function buscarArtista() {
+        var artistName = document.getElementById('artistSearch').value;
+        fetch('/search-json?artist=' + artistName)
+            .then(response => response.json())
+            .then(data => {
+                var artistInfo = `
+                    <h2>Artista Encontrado:</h2>
+                    <h1>${data.name}</h1>
+                    <p>Popularidad: ${data.popularity}</p>
+                    <p>${data.genres ? 'Géneros: ' + data.genres.join(', ') : ''}</p>
+                    <p>Seguidores: ${data.followers}</p>
+                `;
+                document.getElementById('artistName').innerHTML = artistInfo;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                console.error('Tipo de error:', typeof error);
+            });
+    }
+</script>
+
+</body>
+</html>

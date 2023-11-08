@@ -22,6 +22,9 @@ const upload = multer({storage:storage})
 app.use(express.urlencoded({extended:true}));
 app.use(upload.single('archivo'));
 
+
+
+
 app.post('/RecibirArchivo',(req,res)=>{
     console.log(`se recibio el archivo: ${req.file.originalname}`);
     console.log('se recibio el formulario:'+JSON.stringify(req.body));
