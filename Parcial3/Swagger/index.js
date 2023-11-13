@@ -51,7 +51,104 @@ app.post('/Recibir', (req, res) => {
     const { tipo, usuario, contraseña } = req.body;
     res.json({ mensaje: 'Datos recibidos exitosamente \n Tipo: '+tipo + '\n Usuario: ' + usuario + '\ Contraseña: '+contraseña });
 });
-
+/** 
+* @swagger
+* /usuarios/:
+*   get:
+*       tags:
+*           - usuarios 
+*       summary: Obtiene todos los usuarios
+*       description: Obtiene un json que devuelve todos los usuarios que tenemos en la base de datos
+*       responses: 
+*          200:
+*              description: Regresa un json con todos los usuarios registrados
+* 
+* /usuarios/{id}:
+*   get:
+*       tags:
+*           - usuarios
+*       summary: Consultar un usuario mediante su id 
+*       description : Devuelve los datos del usuario mediante su id 
+*       parameters:
+*           - name: id
+*             in: path
+*             description: ID del usuario
+*             required: true
+*       schema:
+*               type: integer
+*               format: int64
+*       responses:
+*          200:
+*              description: Successful operation
+*
+* /insertar:
+*   post:
+*       tags:
+*           - usuarios
+*       summary: Insertar nuevo usuario
+*       description : Mediante un json se agrega un nuevo usuario
+*       parameters:
+*           - name: Tipo
+*             in: path
+*             description: Tipo de usuario que es o el rol que tiene dentro del sistema
+*             required: true
+*           - name: Nombre
+*             in: path
+*             description: EL nombre que tendra el usuario
+*             required: true
+*           - name: Contraseña
+*             in: path 
+*             description: Contraseña para ingresar del usuario
+*             required: true
+*       schema:
+*               type: integer
+*               format: int64
+*       responses:
+*          200:
+*              description: Successful operation
+* /usuario:
+*   put:
+*       tags:
+*           - usuarios
+*       summary: Modificar los datos de un usuario en especifico
+*       description : Mediante un json se modifica los usuarios
+*       parameters:
+*           - name: Tipo
+*             in: path
+*             description: Tipo de usuario que es o el rol que tiene dentro del sistema
+*             required: true
+*           - name: Nombre
+*             in: path
+*             description: EL nombre que tendra el usuario
+*             required: true
+*           - name: Contraseña
+*       .      in: path 
+*             description: Contraseña para ingresar del usuario
+*             required: true
+*       schema:
+*               type: integer
+*               format: int64
+*       responses:
+*          200:
+*              description: Successful operation
+* /usuarios:
+*   delete:
+*       tags:
+*           - usuarios
+*       summary: Eliminar un usuario
+*       description : Mediante un json se modifica los usuarios
+*       parameters:
+*           - name: Tipo
+*             in: path
+*             description: Tipo de usuario que es o el rol que tiene dentro del sistema
+*             required: true
+*       schema:
+*               type: integer
+*               format: int64
+*       responses:
+*          200:
+*              description: Successful operation
+*/
 app.get("/usuarios",async(req,res)=>{    
     try{
         const token = req.token
