@@ -20,7 +20,7 @@ app.use(express.text());
 const theme = new SwaggerTheme('v3');
 const options = {
     explorer: true,
-    customCss: theme.getBuffer('monokai')
+    customCss: theme.getBuffer('newspaper')
 };
 const data = fs.readFileSync(path.join(__dirname,'./Options.json'),{ encoding: 'utf8', flag: 'r' });
 const obj = JSON.parse(data)
