@@ -21,6 +21,8 @@
     "npm": "^10.2.3",
     "path": "^0.12.7",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-themes": "^1.2.30",
+    "swagger-ui-express": "^5.0.0",
+    "swagger-ui-themes": "^3.0.1"
   }
 }

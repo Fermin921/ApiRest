@@ -6,6 +6,8 @@ const mysql =require('mysql2/promise');
 const bearerToken = require('express-bearer-token'); 
 const swaggerUI = require('swagger-ui-express');
 const swaggerjsDoc= require('swagger-jsdoc');
+const { SwaggerTheme } = require('swagger-themes');
+const redoc = require('redoc-express');
 const app=express();
 const cors = require('cors');
 var accessLogStream = fs.createWriteStream(path.join(__dirname,'access.log'),{flags:'a'});
@@ -13,6 +15,20 @@ app.use(morgan('combined',{stream:accessLogStream}));
 app.use(cors());
 app.use(express.json());
 app.use(bearerToken());
+app.use(express.text());
+// app.use('/swagger-theme', express.static(swaggerThemes.getThemes().absolutePath));
+const theme = new SwaggerTheme('v3');
+const options = {
+    explorer: true,
+    customCss: theme.getBuffer('monokai')
+};
+const data = fs.readFileSync(path.join(__dirname,'./Options.json'),{ encoding: 'utf8', flag: 'r' });
+const obj = JSON.parse(data)
+
+const swaggerOptions = {
+    definition: obj,
+    apis: [`${path.join(__dirname,"./index.js")}`],
+}
 
 const multer = require('multer');
 const folder = path.join(__dirname+'/archivos/');
@@ -23,22 +39,6 @@ const storage = multer.diskStorage({
 const upload = multer({storage:storage})
 app.use(express.urlencoded({extended:true}));
 app.use(upload.single('archivo'));
-
-const swaggerOptions = {
-    definition: {
-    openapi: '3.0.0',
-    info: {
-    title: 'API Login',
-    version: '1.0.0',
-    },
-    servers:[
-    {url: "http://localhost:8080"}
-    ],
-    },
-    apis: [`${path.join(__dirname,"./index.js")}`],
-    };
-
-
 
 app.post('/RecibirArchivo',(req,res)=>{
     console.log(`se recibio el archivo: ${req.file.originalname}`);
@@ -122,7 +122,7 @@ app.post('/Recibir', (req, res) => {
 *             description: EL nombre que tendra el usuario
 *             required: true
 *           - name: Contraseña
-*       .      in: path 
+*             in: path
 *             description: Contraseña para ingresar del usuario
 *             required: true
 *       schema:
@@ -242,7 +242,51 @@ app.delete("/usuarios",async(req,res)=>{
 });
 
 const swaggerDocs = swaggerjsDoc(swaggerOptions);
-app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerDocs));
+
+app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerDocs,options));
+app.get("/options",(req,res)=>
+{
+    res.json(data)
+})
+
+app.use("/api-docs-json",(req,res)=>{
+    res.json(swaggerDocs);
+});
+
+ // define title and specUrl location
+ // serve redoc
+app.get(
+    '/api-docs-redoc',
+    redoc({
+    title: 'API Docs',
+    specUrl: '/api-docs-json',
+      nonce: '', // <= it is optional,we can omit this key and value
+      // we are now start supporting the redocOptions object
+      // you can omit the options object if you don't need it
+      // https://redocly.com/docs/api-reference-docs/configuration/functionality/
+    redocOptions: {
+        theme: {
+        colors: {
+            primary: {
+            main: '#6EC5AB'
+            }
+        },
+        typography: {
+            fontFamily: `"museo-sans", 'Helvetica Neue', Helvetica, Arial, sans-serif`,
+            fontSize: '15px',
+            lineHeight: '1.5',
+            code: {
+            code: '#87E8C7',
+            backgroundColor: '#4D4D4E'
+            }
+        },
+        menu: {
+            backgroundColor: '#ffffff'
+        }
+        }
+    }
+    })
+);
 
 app.listen(8080,()=>{
     console.log("Servidor express escuchando en el puerto 8080");
