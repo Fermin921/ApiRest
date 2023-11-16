@@ -59,6 +59,17 @@ app.post('/Recibir', (req, res) => {
 *           - usuarios 
 *       summary: Obtiene todos los usuarios
 *       description: Obtiene un json que devuelve todos los usuarios que tenemos en la base de datos
+*       parameters:
+*           - name: id
+*             in: path
+*             description: ID del usuario
+*             required: true
+*             schema:
+*               type: integer
+*               format: int64
+*       schema:
+*               type: integer
+*               format: int64
 *       responses: 
 *          200:
 *              description: Regresa un json con todos los usuarios registrados
@@ -74,7 +85,7 @@ app.post('/Recibir', (req, res) => {
 *             in: path
 *             description: ID del usuario
 *             required: true
-*       schema:
+*             schema:
 *               type: integer
 *               format: int64
 *       responses:
@@ -92,14 +103,23 @@ app.post('/Recibir', (req, res) => {
 *             in: path
 *             description: Tipo de usuario que es o el rol que tiene dentro del sistema
 *             required: true
+*             schema:
+*               type: integer
+*               format: int64
 *           - name: Nombre
 *             in: path
 *             description: EL nombre que tendra el usuario
 *             required: true
+*             schema:
+*               type: integer
+*               format: int64
 *           - name: Contraseña
 *             in: path 
 *             description: Contraseña para ingresar del usuario
 *             required: true
+*             schema:
+*               type: integer
+*               format: int64
 *       schema:
 *               type: integer
 *               format: int64
@@ -117,14 +137,23 @@ app.post('/Recibir', (req, res) => {
 *             in: path
 *             description: Tipo de usuario que es o el rol que tiene dentro del sistema
 *             required: true
+*             schema:
+*               type: integer
+*               format: int64
 *           - name: Nombre
 *             in: path
 *             description: EL nombre que tendra el usuario
 *             required: true
+*             schema:
+*               type: integer
+*               format: int64
 *           - name: Contraseña
 *             in: path
 *             description: Contraseña para ingresar del usuario
 *             required: true
+*             schema:
+*               type: integer
+*               format: int64
 *       schema:
 *               type: integer
 *               format: int64
@@ -142,6 +171,9 @@ app.post('/Recibir', (req, res) => {
 *             in: path
 *             description: Tipo de usuario que es o el rol que tiene dentro del sistema
 *             required: true
+*             schema:
+*               type: integer
+*               format: int64
 *       schema:
 *               type: integer
 *               format: int64

@@ -17,6 +17,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.6.3",
     "npm": "^10.2.3",
+    "openapi-snippet": "^0.14.0",
     "path": "^0.12.7",
     "redoc-express": "^2.1.0",
     "swagger-jsdoc": "^6.2.8",
