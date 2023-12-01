@@ -8,7 +8,7 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "testMatch": ["<rootDir>src/test/test.js"]
+    "testMatch": ["<rootDir>src/test.js"]
   },
   "author": "",
   "license": "ISC",
